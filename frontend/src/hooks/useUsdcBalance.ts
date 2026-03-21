@@ -10,7 +10,8 @@ export function useUsdcBalance() {
     queryKey: ["usdc-balance", address],
     queryFn: async (): Promise<string> => {
       if (!address) return "0";
-      return "1250000000";
+      // Placeholder until real USDC contract read is wired for the selected EVM chain.
+      return "0";
     },
     enabled: connected && !!address,
     refetchInterval: 15_000,

@@ -1,7 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { Wallet, Copy, LogOut, ChevronDown, Droplets, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,9 +24,11 @@ import { truncateAddress, formatUsdc } from "@/lib/utils/format";
 import { toast } from "sonner";
 
 export function WalletButton() {
-  const { connected, address, connecting, connect, disconnect } = useWallet();
+  const { connected, address, connecting, connect, getWalletOptions, disconnect } = useWallet();
   const { data: balance } = useUsdcBalance();
   const { requestFaucet, isPending: faucetPending } = useFaucet();
+  const walletOptions = getWalletOptions();
+  const [openWalletModal, setOpenWalletModal] = useState(false);
 
   const showFaucet = connected && address && (balance === undefined || balance === "0");
 
@@ -35,15 +46,44 @@ export function WalletButton() {
 
   if (!connected || !address) {
     return (
-      <Button
-        onClick={connect}
-        disabled={connecting}
-        size="sm"
-        className="btn-depth gap-2"
-      >
-        <Wallet className="h-3.5 w-3.5" />
-        {connecting ? "Connecting..." : "Connect"}
-      </Button>
+      <Dialog open={openWalletModal} onOpenChange={setOpenWalletModal}>
+        <DialogTrigger asChild>
+          <Button
+            disabled={connecting}
+            size="sm"
+            className="btn-depth gap-2"
+          >
+            <Wallet className="h-3.5 w-3.5" />
+            {connecting ? "Connecting..." : "Connect Wallet"}
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Choose Wallet</DialogTitle>
+            <DialogDescription>
+              Select a wallet to connect in your browser.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid gap-2">
+            {walletOptions.map((option) => (
+              <Button
+                key={option.id}
+                onClick={async () => {
+                  await connect(option.id);
+                  setOpenWalletModal(false);
+                }}
+                disabled={connecting}
+                variant="outline"
+                className="justify-start gap-2"
+              >
+                <Wallet className="h-4 w-4" />
+                <span>{option.label}</span>
+              </Button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     );
   }
 

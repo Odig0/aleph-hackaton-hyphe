@@ -7,7 +7,7 @@ import { useWalletStore } from "@/stores/wallet";
  * Wraps the Zustand store for convenient use in components.
  */
 export function useWallet() {
-  const { connected, address, connecting, error, connect, disconnect } =
+  const { connected, address, connecting, error, connect, disconnect, getWalletOptions } =
     useWalletStore();
 
   return {
@@ -16,6 +16,7 @@ export function useWallet() {
     connecting,
     error,
     connect,
+    getWalletOptions,
     disconnect,
   };
 }
