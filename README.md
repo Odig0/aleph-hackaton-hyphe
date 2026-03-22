@@ -1,108 +1,323 @@
-# Sample GenLayer project
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
-[![Discord](https://img.shields.io/badge/Discord-Join%20us-5865F2?logo=discord&logoColor=white)](https://discord.gg/8Jm4v89VAu)
-[![Telegram](https://img.shields.io/badge/Telegram--T.svg?style=social&logo=telegram)](https://t.me/genlayer)
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/yeagerai.svg?style=social&label=Follow%20%40GenLayer)](https://x.com/GenLayer)
-[![GitHub star chart](https://img.shields.io/github/stars/yeagerai/genlayer-project-boilerplate?style=social)](https://star-history.com/#yeagerai/genlayer-js)
+# HYPHE
 
-## 👀 About
-This project includes the boilerplate code for a GenLayer use case implementation, specifically a football bets game.
+**AI-Native Prediction Markets on GenLayer**
 
-## 📦 What's included
-- Basic requirements to deploy and test your intelligent contracts locally
-- Configuration file template
-<!-- - Test functions to write complete end-to-end tests -->
-- An example of an intelligent contract (Football Bets)
-- Example end-to-end tests for the contract provided
-- A production-ready Next.js 15 frontend with TypeScript, TanStack Query, and Radix UI
+*Trade on real-world outcomes. Let AI participate in consensus.*
 
-## 🛠️ Requirements
-- A running GenLayer Studio (Install from [Docs](https://docs.genlayer.com/developers/intelligent-contracts/tooling-setup#using-the-genlayer-studio) or work with the hosted version of [GenLayer Studio](https://studio.genlayer.com/)). If you are working locally, this repository code does not need to be located in the same directory as the Genlayer Studio.
-- [GenLayer CLI](https://github.com/genlayerlabs/genlayer-cli) globally installed. To install or update the GenLayer CLI run `npm install -g genlayer`
+Built on **GenLayer Intelligent Contracts**
+License: MIT
 
-## 🚀 Steps to run this example
+---
 
-### 1. Deploy the contract
-   Deploy the contract from `/contracts/football_bets.py` using the GenLayer CLI:
-   1. Choose the network that you want to use (studionet, localnet, or tesnet-*): `genlayer network`
-   2. Execute the deploy command `genlayer deploy`. This command is going to execute the deploy script located in `/deploy/deployScript.ts`
+## Overview
 
-### 2. Setup the frontend environment
-  1. All the content of the dApp is located in the `/frontend` folder.
-  2. Copy the `.env.example` file in the `frontend` folder and rename it to `.env`, then fill in the values for your configuration. The provided NEXT_PUBLIC_GENLAYER_RPC_URL value is the backend of the hosted GenLayer Studio.
-  3. Add the deployed contract address to the `/frontend/.env` under the variable `NEXT_PUBLIC_CONTRACT_ADDRESS`
+HYPHE is an on-chain prediction market protocol built on **GenLayer Bradbury**, where **AI participates directly in validation and dispute resolution**.
 
-### 4. Run the frontend Next.js app
-   Execute the following commands in your terminal:
+Users create and trade markets on future events (sports, politics, crypto, etc.) while Intelligent Contracts use **Optimistic Democracy consensus** to verify outcomes and resolve disputes.
 
-   **Using bun:**
-   ```shell
-   cd frontend
-   bun install
-   bun dev
-   ```
+This removes the need for centralized oracles and enables prediction markets that are:
 
-   **Using npm:**
-   ```shell
-   cd frontend
-   npm install
-   npm run dev
-   ```
+* Autonomous
+* Censorship-resistant
+* AI-auditable
 
-   The terminal should display a link to access your frontend app (usually at <http://localhost:3000/>).
-   For more information on the code see [GenLayerJS](https://github.com/yeagerai/genlayer-js).
-   
-### 5. Test contracts
-1. Install the Python packages listed in the `requirements.txt` file in a virtual environment.
-2. Make sure your GenLayer Studio is running. Then execute the following command in your terminal:
-   ```shell
-   gltest
-   ```
+---
 
-## ⚽ How the Football Bets Contract Works
+## Table of Contents
 
-The Football Bets contract allows users to create bets for football matches, resolve those bets, and earn points for correct bets. Here's a breakdown of its main functionalities:
+* [The Problem](#the-problem)
+* [Our Solution](#our-solution)
+* [Features](#features)
+* [Intelligent Contracts](#intelligent-contracts)
+* [Tech Stack](#tech-stack)
+* [Getting Started](#getting-started)
+* [Project Structure](#project-structure)
+* [How It Works](#how-it-works)
+* [Hackathon Context](#hackathon-context)
+* [Contract Addresses](#contract-addresses)
+* [Roadmap](#roadmap)
+* [License](#license)
 
-1. Creating Bets:
-   - Users can create a bet for a specific football match by providing the game date, team names, and their predicted winner.
-   - The contract checks if the game has already finished and if the user has already made a bet for this match.
+---
 
-2. Resolving Bets:
-   - After a match has concluded, users can resolve their bets.
-   - The contract fetches the actual match result from a specified URL.
-   - If the Bet was correct, the user earns a point.
+## The Problem
 
-3. Querying Data:
-   - Users can retrieve all bets.
-   - The contract also allows querying of points, either for all players or for a specific player.
+Prediction markets are powerful tools for aggregating information and forecasting future events. However, existing platforms suffer from three major issues:
 
-4. Getting Points:
-   - Points are awarded for correct bets.
-   - Users can check their total points or the points of any player.
+### Centralized oracles
 
-## 🧪 Tests
+Most prediction markets rely on trusted third parties to resolve outcomes, introducing bias and single points of failure.
 
-This project includes integration tests that interact with the contract deployed in the Studio. These tests cover the main functionalities of the Football Bets contract:
+### Manual dispute resolution
 
-1. Creating a bet
-2. Resolving a bet
-3. Querying bets for a player
-4. Querying points for a player
+When outcomes are ambiguous, disputes often require human moderators or off-chain governance.
 
-The tests simulate real-world interactions with the contract, ensuring that it behaves correctly under various scenarios. They use the GenLayer Studio to deploy and interact with the contract, providing a comprehensive check of the contract's functionality in a controlled environment.
+### Lack of AI integration
 
-To run the tests, use the `gltest` command as mentioned in the "Steps to run this example" section.
+Despite AI being well-suited to evaluate evidence and probabilistic outcomes, current blockchain systems cannot natively integrate AI into consensus.
 
+---
 
-## 💬 Community
-Connect with the GenLayer community to discuss, collaborate, and share insights:
-- **[Discord Channel](https://discord.gg/8Jm4v89VAu)**: Our primary hub for discussions, support, and announcements.
-- **[Telegram Group](https://t.me/genlayer)**: For more informal chats and quick updates.
+## Our Solution
 
-Your continuous feedback drives better product development. Please engage with us regularly to test, discuss, and improve GenLayer.
+HYPHE leverages **GenLayer’s Intelligent Contracts** to create prediction markets where:
 
-## 📖 Documentation
-For detailed information on how to use GenLayerJS SDK, please refer to our [documentation](https://docs.genlayer.com/).
+* AI models validate evidence and outcomes
+* Human participants can challenge results through optimistic democracy
+* Final decisions emerge from decentralized AI-human consensus
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This results in markets that are:
+
+* Trust-minimized
+* Self-resolving
+* Resistant to manipulation
+
+---
+
+## Features
+
+### Prediction Market Trading
+
+* Create binary and multi-outcome markets
+* Trade shares representing event outcomes
+* Peer-to-peer escrow using on-chain contracts
+
+### AI-Driven Resolution
+
+* Intelligent Contracts evaluate evidence submitted after event completion
+* AI models analyze data sources such as match results, news, or official reports
+* Consensus emerges through GenLayer validation rounds
+
+### Dispute System
+
+* Anyone can challenge an AI decision
+* Alternative models can be proposed during dispute rounds
+* Optimistic Democracy finalizes the result
+
+### Fully On-Chain Escrow
+
+* Funds remain locked until resolution
+* Winning traders redeem automatically
+* No centralized custody or intermediaries
+
+---
+
+## Intelligent Contracts
+
+HYPHE is composed of multiple Intelligent Contracts deployed on the **GenLayer Bradbury Testnet**.
+
+| Contract        | Purpose                              |
+| --------------- | ------------------------------------ |
+| `hyphe_market`  | Market creation, trading, and escrow |
+| `hyphe_oracle`  | AI-assisted outcome verification     |
+| `hyphe_token`   | Outcome share token logic            |
+| `football_bets` | Example sports prediction market     |
+
+---
+
+## Tech Stack
+
+| Layer         | Technology                   |
+| ------------- | ---------------------------- |
+| Blockchain    | GenLayer Bradbury Testnet    |
+| Contracts     | Python Intelligent Contracts |
+| Consensus     | Optimistic Democracy         |
+| AI Validation | LLM-based model routing      |
+| Frontend      | Next.js + React              |
+| Backend       | Node.js + TypeScript         |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+* Node.js ≥ 20
+* Python ≥ 3.10
+* GenLayer CLI
+* Access to Bradbury testnet
+
+---
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/hyphe-genlayer.git
+cd hyphe-genlayer
+```
+
+---
+
+### 2. Install dependencies
+
+```bash
+npm install
+pip install -r requirements.txt
+```
+
+---
+
+### 3. Configure environment variables
+
+Create a `.env` file in the root directory:
+
+```env
+GENLAYER_RPC_URL=
+GENLAYER_PRIVATE_KEY=
+AI_MODEL_ENDPOINT=
+```
+
+---
+
+### 4. Deploy Intelligent Contracts
+
+```bash
+genlayer deploy contracts/hyphe_market.py
+genlayer deploy contracts/hyphe_oracle.py
+genlayer deploy contracts/hyphe_token.py
+```
+
+---
+
+### 5. Start the frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+Open in your browser:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Project Structure
+
+```
+hyphe/
+│
+├── contracts/
+│   ├── hyphe_market.py
+│   ├── hyphe_oracle.py
+│   ├── hyphe_token.py
+│   └── football_bets.py
+│
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   └── lib/
+│
+├── backend/
+│   ├── api/
+│   └── services/
+│
+└── README.md
+```
+
+---
+
+## How It Works
+
+### Trading Flow
+
+1. A user creates a market:
+   **"Will Argentina win the next match?"**
+
+2. Other users buy shares in:
+
+   * YES
+   * NO
+
+3. Funds are locked in the market contract until resolution.
+
+---
+
+### Resolution Flow
+
+After the event concludes:
+
+1. Evidence is submitted (scores, links, official sources)
+2. The `hyphe_oracle` contract requests AI evaluation
+3. Validators run independent AI models
+4. If consensus is reached → market finalizes
+5. If challenged → a dispute round begins
+
+---
+
+### Payout
+
+* Winning shares redeem **1:1** against the escrow pool
+* Losing shares become worthless
+* No manual intervention is required
+
+---
+
+## Hackathon Context
+
+This project was built for:
+
+**GenLayer Bradbury + Aleph Hackathon**
+
+It explores:
+
+* AI-native oracles
+* Agent-to-agent economic coordination
+* Intelligent Contracts in financial markets
+
+Relevant tracks:
+
+* Prediction Markets & P2P Betting
+* AI Governance
+* Agentic Economy Infrastructure
+
+---
+
+## Contract Addresses
+
+Deployed on **Bradbury Testnet**:
+
+| Contract      | Address                                                              |
+| ------------- | -------------------------------------------------------------------- |
+| football_bets | `0x2d5d53cf78e0c38212a4d07420119661ef6e6d8857da8fa85b464d32febd94fd` |
+| hyphe_market  | `0xabdcbeadf92b50a662e1210448471ac5df71402ce28886fa761db37c7683d31d` |
+| hyphe_oracle  | `0x5bdb810ea72b7e591243b36a9bccec2d98517082dae6402d60fe20af28a187dc` |
+| hyphe_token   | `0xdb5848552558ad964baa931181df69b7434d87f081490af23c35aa1f175c2084` |
+
+---
+
+## Roadmap
+
+### Phase 1 — Hackathon MVP
+
+* Market creation
+* AI-assisted resolution
+* On-chain escrow
+
+### Phase 2 — Post-Hackathon
+
+* Multi-market dashboard
+* Model routing optimization
+* Improved evidence ingestion pipelines
+
+### Phase 3 — Production
+
+* Cross-chain liquidity
+* DAO governance
+* Reputation system for AI models
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## Acknowledgements
+
+* GenLayer Foundation
+* Bradbury Testnet contributors
+* Internet Court and pm-kit open source examples
